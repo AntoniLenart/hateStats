@@ -1,0 +1,1 @@
+spotted,battles_on_stunning_vehicles,hits,battle_avg_xp,draws,max_xp,survived_battles,wins,losses,capture_points,battles,damage_dealt,damage_received,max_frags,shots,frags,max_damage,xp,avg_damage_assisted,piercings,user_id,nickname
