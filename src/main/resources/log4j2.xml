@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <Property name="path">./src/main/java/logger/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d %-5level %logger{36}.%-5M | %msg%n" />
+        </Console>
+        <File name="LOGS" fileName="${path}/info.log">
+            <PatternLayout>
+                <pattern>%d %-5level %logger{36}.%-5M | %msg%n</pattern>
+            </PatternLayout>
+        </File>
+        <File name="ERRORS" fileName="${path}/error.log">
+            <PatternLayout>
+                <pattern>%d %-5level %logger{36}.%-5M | %msg%n</pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="wargaming_api" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LOGS"/>
+        </Logger>
+
+        <Logger name="windowBuilder" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LOGS"/>
+        </Logger>
+
+        <Logger name="logger" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="LOGS"/>
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
