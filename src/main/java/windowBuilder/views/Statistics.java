@@ -193,6 +193,8 @@ public class Statistics extends JFrame {
 				labels[i].setText(tmp + stats[i]);
 		}
 		
+		//===================================Auto generated code from windowBuilder================================
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -300,12 +302,7 @@ public class Statistics extends JFrame {
 					.addComponent(btnQuit)
 					.addContainerGap())
 		);
-		
-		
-
 		contentPane.setLayout(gl_contentPane);
-		
-		
 	}
 	
 	private void createEvents() {
