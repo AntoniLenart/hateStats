@@ -52,33 +52,19 @@ public class Statistics extends JFrame {
 	private JLabel lblAllXp;
 	private JLabel lblFrags;
 
+	private JLabel lblEstimatedWn8;
+	private JLabel lblWn8;
+	
 	private JLabel lblBattlesIcon;
 	private JLabel lblBestIcon;
-	private JLabel lblHeader;
-	
-	private JButton btnQuit;
 	private JLabel lblShotsIcon;
 	private JLabel lblAverageIcon;
 	private JLabel lblWn8Icon;
-	private JLabel lblEstimatedWn8;
-	private JLabel lblWn8;
+	
+	private JLabel lblHeader;
+	
+	private JButton btnQuit;
 	private JButton btnNewPlayer;
-
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Statistics frame = new Statistics("szachit");
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	public Statistics(String username) {
 		logger.info("Opening statistics window.");
@@ -90,6 +76,8 @@ public class Statistics extends JFrame {
 		
 		contentPane = new JPanel();
 
+		// Frame settings.
+		
 		setTitle("hateStats");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Statistics.class.getResource("/windowBuilder/resources/stats_128.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

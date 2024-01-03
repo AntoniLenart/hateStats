@@ -770,3 +770,28 @@
 2024-01-03 20:06:33,101 ERROR wargaming_api.WargamingAPI.getUserId | Data not found
 2024-01-03 20:06:33,102 ERROR wargaming_api.WargamingAPI.getUserId | org.json.JSONException: JSONArray[0] not found.
 2024-01-03 20:06:33,755 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 21:34:42,318 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 21:34:45,763 INFO  windowBuilder.views.Statistics.<init> | Opening statistics window.
+2024-01-03 21:34:45,780 INFO  wargaming_api.WargamingAPI.getUserId | Success URL
+2024-01-03 21:34:46,389 INFO  wargaming_api.WargamingAPI.getUserId | Response: {"status":"ok","meta":{"count":1},"data":[{"nickname":"szachit","account_id":501745387}]}
+2024-01-03 21:34:46,395 INFO  wargaming_api.WargamingAPI.getUserId | Success retrieving accountID
+2024-01-03 21:34:46,396 INFO  wargaming_api.WargamingAPI.getStats | Connected to https://api.worldoftanks.eu/wot/account/info/?application_id=636b76a3b5bd1b0812f0f34df886fe67&account_id=501745387&fields=statistics.all.battles%2Cstatistics.all.wins%2Cstatistics.all.draws%2Cstatistics.all.losses%2Cstatistics.all.survived_battles%2Cstatistics.all.frags%2Cstatistics.all.spotted%2Cstatistics.all.damage_dealt%2Cstatistics.all.max_frags%2Cstatistics.all.max_xp%2Cstatistics.all.max_damage%2Cstatistics.all.damage_received%2Cstatistics.all.hits%2Cstatistics.all.avg_damage_assisted%2Cstatistics.all.battles_on_stunning_vehicles%2Cstatistics.all.battle_avg_xp%2Cstatistics.all.xp%2Cstatistics.all.capture_points%2Cstatistics.all.shots%2Cstatistics.all.piercings
+2024-01-03 21:34:46,491 INFO  wargaming_api.WargamingAPI.getStats | Success retrieving stats
+2024-01-03 21:34:47,021 INFO  wargaming_api.Wn8Scrapper.getWN8 | Success scraping wn8: 1921.38
+2024-01-03 22:02:10,909 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 22:02:17,540 INFO  windowBuilder.views.Statistics.<init> | Opening statistics window.
+2024-01-03 22:02:17,559 INFO  wargaming_api.WargamingAPI.getUserId | Success URL
+2024-01-03 22:02:17,797 ERROR wargaming_api.WargamingAPI.getUserId | URL incorrect
+2024-01-03 22:02:17,798 ERROR wargaming_api.WargamingAPI.getUserId | java.net.UnknownHostException: api.worldoftanks.eu
+2024-01-03 22:02:17,799 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 22:17:14,985 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 22:17:17,999 INFO  windowBuilder.views.Statistics.<init> | Opening statistics window.
+2024-01-03 22:17:18,269 ERROR wargaming_api.WargamingAPI.getUserId | Error: No internet connection
+2024-01-03 22:17:18,269 ERROR wargaming_api.WargamingAPI.getUserId | java.net.UnknownHostException: api.worldoftanks.eu
+2024-01-03 22:17:19,137 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-03 22:17:38,597 INFO  windowBuilder.views.Statistics.<init> | Opening statistics window.
+2024-01-03 22:17:38,955 INFO  wargaming_api.WargamingAPI.getUserId | Response: {"status":"ok","meta":{"count":1},"data":[{"nickname":"szachit","account_id":501745387}]}
+2024-01-03 22:17:38,963 INFO  wargaming_api.WargamingAPI.getUserId | Success retrieving accountID
+2024-01-03 22:17:38,964 INFO  wargaming_api.WargamingAPI.getStats | Connected to https://api.worldoftanks.eu/wot/account/info/?application_id=636b76a3b5bd1b0812f0f34df886fe67&account_id=501745387&fields=statistics.all.battles%2Cstatistics.all.wins%2Cstatistics.all.draws%2Cstatistics.all.losses%2Cstatistics.all.survived_battles%2Cstatistics.all.frags%2Cstatistics.all.spotted%2Cstatistics.all.damage_dealt%2Cstatistics.all.max_frags%2Cstatistics.all.max_xp%2Cstatistics.all.max_damage%2Cstatistics.all.damage_received%2Cstatistics.all.hits%2Cstatistics.all.avg_damage_assisted%2Cstatistics.all.battles_on_stunning_vehicles%2Cstatistics.all.battle_avg_xp%2Cstatistics.all.xp%2Cstatistics.all.capture_points%2Cstatistics.all.shots%2Cstatistics.all.piercings
+2024-01-03 22:17:39,056 INFO  wargaming_api.WargamingAPI.getStats | Success retrieving stats
+2024-01-03 22:17:39,615 INFO  wargaming_api.Wn8Scrapper.getWN8 | Success scraping wn8: 1921.38

@@ -2,11 +2,9 @@ package wargaming_api;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.Core;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,11 +47,10 @@ public class WargamingAPI {
     
     public static int getUserId(String username) {
     	
-        try {
-            URL url = null;
+        try {            	
+        	URL url = null;
             try {
                 url = new URI(API_URL_USER_ID + "&search=" + username).toURL();
-                logger.info("Success URL");
             } catch (URISyntaxException e) {
                 logger.error("URI error");
                 logger.error(e);
@@ -61,50 +58,55 @@ public class WargamingAPI {
                 logger.error("URI to URL error");
                 logger.error(e);
             }
-
-            // Answer from API.
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
             
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-
-            reader.close();
-            connection.disconnect();
-            
-            String responseString = response.toString();
-            
-            if (responseString.contains("error")) {
-            	logger.error("Error retrieving data");
-            	JOptionPane.showMessageDialog(null, "Data not found.");
-            	correctUsername = false;
+            if (url == null) {
             	return 1;
             }
-            
-            logger.info("Response: " + response);
-            
-            //Extract account ID
+            // Answer from API.
             try {
-		        JSONObject jsonResponse = new JSONObject(responseString);
-		        JSONArray data = jsonResponse.getJSONArray("data");
-		        JSONObject userData = data.getJSONObject(0);
-		        int accountId = userData.getInt("account_id");
-		        	
-		        logger.info("Success retrieving accountID");
-				correctUsername = true;
-		        return accountId;
-		        
-            } catch (JSONException e) {
-            	correctUsername = false;
-            	logger.error("Data not found");
+	            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	            connection.setRequestMethod("GET");
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+	            StringBuilder response = new StringBuilder();
+	            String line;
+	            while ((line = reader.readLine()) != null) {
+	                response.append(line);
+	            }
+	            
+	            reader.close();
+                connection.disconnect();
+                
+                String responseString = response.toString();
+                if (responseString.contains("error")) {
+                	logger.error("Error retrieving data");
+                	JOptionPane.showMessageDialog(null, "Data not found.");
+                	correctUsername = false;
+                	return 1;
+                }
+                
+                logger.info("Response: " + response);
+                
+                //Extract account ID
+                try {
+    		        JSONObject jsonResponse = new JSONObject(responseString);
+    		        JSONArray data = jsonResponse.getJSONArray("data");
+    		        JSONObject userData = data.getJSONObject(0);
+    		        int accountId = userData.getInt("account_id");
+    		        	
+    		        logger.info("Success retrieving accountID");
+    				correctUsername = true;
+    		        return accountId;   
+                } catch (JSONException e) {
+                	correctUsername = false;
+                	logger.error("Data not found");
+                	logger.error(e);
+                	JOptionPane.showMessageDialog(null, "Data not found.");
+                }
+            } catch (UnknownHostException e) {
+            	logger.error("Error: No internet connection");
             	logger.error(e);
-            	JOptionPane.showMessageDialog(null, "Data not found.");
-            }
-            
+            	JOptionPane.showMessageDialog(null, "No internet connection.");
+            } 
         } catch (IOException e){
             logger.error("URL incorrect");
             logger.error(e);
