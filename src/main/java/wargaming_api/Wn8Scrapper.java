@@ -9,12 +9,13 @@ import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Wn8Scrapper {
 	
 	private final static Logger logger = LogManager.getLogger(Wn8Scrapper.class);
 	private final static String url = "https://pl.wot-life.com/eu/player/";
-	private final static String path = "#tab1 > table.stats-table.table-md > tbody > tr:nth-child(16) > td.text-right.wn.s7";
+	private final static String path = "#tab1 > table:nth-child(3) > tbody > tr:nth-child(15) > td";
 	
 	public static double getWN8 (String username) {
 		double wn8 = 69;
@@ -23,15 +24,25 @@ public class Wn8Scrapper {
 			Document document = Jsoup.connect(url + username).get();
 			Element element = document.select(path).first();
 			
+
+			
 			if (element == null) {
 				logger.error("Element not found");
+				return 1;
 			}
+
 			String response = element.toString();
-			response = response.replace("<td colspan=\"2\" class=\"text-right wn s7\">", "");
+			
+			// Check for every s0-9 and replace.
+			for (int i = 0; i < 10; i++) {
+				response = response.replace("<td colspan=\"2\" class=\"text-right wn s" + String.valueOf(i) + "\">", "");
+			}
+			
 			response = response.replace("</td>", "");
 			response = response.replace(",", ".");
 			
-			logger.info("Success scraping wn8:" + response);
+			
+			logger.info("Success scraping wn8: " + response);
 			
 			wn8 = Double.parseDouble(response);
 			return wn8;

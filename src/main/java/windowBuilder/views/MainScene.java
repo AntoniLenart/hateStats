@@ -75,9 +75,11 @@ public class MainScene extends JFrame {
 		JLabel lblUsername = new JLabel("Username:");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		
+		// Buttons.
 		btnGetStats = new JButton("Get stats");
 		btnQuit = new JButton("Quit");
 
+		//===========================Auto generated code from window builder.=================================
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(

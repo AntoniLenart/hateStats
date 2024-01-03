@@ -13,6 +13,7 @@ import java.net.*;
 public class WargamingAPI {
 	
     private final static Logger logger = LogManager.getLogger(WargamingAPI.class);
+    
     private static final String [] RESPONSE_FIELDS = {
             "statistics.all.battles",
             "statistics.all.wins",
@@ -33,7 +34,9 @@ public class WargamingAPI {
             "statistics.all.xp",
             "statistics.all.capture_points",
             "statistics.all.shots",
-            "statistics.all.piercings"};
+            "statistics.all.piercings"
+            };
+    
     private static final String API_URL_USER_ID = "https://api.worldoftanks.eu/wot/account/list/?application_id=636b76a3b5bd1b0812f0f34df886fe67";
     private static final String API_URL_STATISTICS = "https://api.worldoftanks.eu/wot/account/info/?application_id=636b76a3b5bd1b0812f0f34df886fe67";
     
@@ -58,8 +61,8 @@ public class WargamingAPI {
                 connection.setRequestMethod("GET");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 StringBuilder response = new StringBuilder();
+                
                 String line;
-
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
                 }

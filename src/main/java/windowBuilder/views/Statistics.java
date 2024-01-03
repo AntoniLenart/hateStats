@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import wargaming_api.WargamingAPI;
+import wargaming_api.Wn8Color;
+import wargaming_api.Wn8Scrapper;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -18,7 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Statistics extends JFrame {
 
@@ -51,6 +53,11 @@ public class Statistics extends JFrame {
 	private JLabel lblHeader;
 	
 	private JButton btnQuit;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblWn8Icon;
+	private JLabel lblEstimatedWn8;
+	private JLabel lblWn8;
 
 	/**
 	 * Launch the application.
@@ -88,14 +95,17 @@ public class Statistics extends JFrame {
 
 		setContentPane(contentPane);
 
+		// Header label.
 		lblHeader = new JLabel("hateStats for " + username);
 		lblHeader.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		lblBattlesIcon = new JLabel("");
+		//=====================ICONS==========================================
+		
+		lblBattlesIcon = new JLabel();
 		lblBattlesIcon.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/battles_128.png")));
 		
 		lblBestIcon = new JLabel();
-		lblBestIcon.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/wins_128.png")));
+		lblBestIcon.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/best_128.png")));
 		
 		//======================================================================================
 		lblBattles = new JLabel("Battles:");
@@ -114,7 +124,6 @@ public class Statistics extends JFrame {
 		lblSurvived.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		lblSpotted = new JLabel("Spotted:");
-		lblSpotted.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSpotted.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		lblDamageDealt = new JLabel("Damage dealt:");
@@ -161,7 +170,7 @@ public class Statistics extends JFrame {
 
 		btnQuit = new JButton("Quit");
 		
-		// Adding stats to laybels.
+		// Adding stats to labels.
 		JLabel[] labels = new JLabel []{
 			 	lblBattles,
 			    lblWins,
@@ -190,8 +199,34 @@ public class Statistics extends JFrame {
 		
 		for (int i = 0; i < stats.length; i++) {
 				String tmp = labels[i].getText();
-				labels[i].setText(tmp + stats[i]);
+				labels[i].setText(tmp + " " + stats[i]);
 		}
+		
+		// Wn8 Labels.
+		lblEstimatedWn8 = new JLabel("Estimated wn8:");
+		lblEstimatedWn8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		lblWn8 = new JLabel("Wn8:");
+		lblWn8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		
+		// Adding player's wn8 to label.
+		double wn8_raw = Wn8Scrapper.getWN8(username);
+		String wn8 = Double.toString(wn8_raw);
+		
+		Color color = Wn8Color.getColor(wn8_raw);
+		
+		lblWn8.setText(lblWn8.getText() + " " + wn8);
+		lblWn8.setForeground(color);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/shots_128.png")));
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/average_128.png")));
+		
+		lblWn8Icon = new JLabel();
+		lblWn8Icon.setIcon(new ImageIcon(Statistics.class.getResource("/windowBuilder/resources/wins_128.png")));
+		
 		
 		//===================================Auto generated code from windowBuilder================================
 		
@@ -199,50 +234,59 @@ public class Statistics extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblBattlesIcon, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblBattlesIcon, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel)
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblAllXp, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 446, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblDamageReceived)
-										.addComponent(lblDamageDealt)
-										.addComponent(lblSpotted)
-										.addComponent(lblSurvived)
-										.addComponent(lblDraws)
-										.addComponent(lblLoses)
-										.addComponent(lblWins)
-										.addComponent(lblBattles)
-										.addComponent(lblHits)
-										.addComponent(lblShots)
-										.addComponent(lblPiercings))
-									.addGap(180)
-									.addComponent(lblBestIcon, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblMaxFrags)
-										.addComponent(lblMaxXp)
-										.addComponent(lblMaxDamage, Alignment.LEADING))
-									.addGap(573))
-								.addComponent(lblAverageXp, Alignment.LEADING)
-								.addComponent(lblAverageAssist, Alignment.LEADING)
-								.addComponent(lblCapturePoints, Alignment.LEADING)
-								.addComponent(lblArtilleryBattles, Alignment.LEADING)
-								.addComponent(lblFrags, Alignment.LEADING)))
+										.addComponent(lblArtilleryBattles)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblDamageReceived)
+												.addComponent(lblDamageDealt)
+												.addComponent(lblSpotted)
+												.addComponent(lblSurvived)
+												.addComponent(lblDraws)
+												.addComponent(lblLoses)
+												.addComponent(lblWins)
+												.addComponent(lblBattles)
+												.addComponent(lblHits)
+												.addComponent(lblShots)
+												.addComponent(lblPiercings)
+												.addComponent(lblAverageAssist)
+												.addComponent(lblAllXp, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblAverageXp)
+												.addComponent(lblFrags)
+												.addComponent(lblCapturePoints))
+											.addGap(180)
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addComponent(lblBestIcon, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+													.addGap(18)
+													.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblMaxFrags)
+														.addComponent(lblMaxXp)
+														.addComponent(lblMaxDamage)))
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addComponent(lblWn8Icon, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+													.addGap(18)
+													.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+														.addComponent(lblWn8)
+														.addComponent(lblEstimatedWn8)))))))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(8)
+									.addComponent(lblHeader, GroupLayout.PREFERRED_SIZE, 340, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(8)
-							.addComponent(lblHeader, GroupLayout.PREFERRED_SIZE, 340, GroupLayout.PREFERRED_SIZE)))
-					.addGap(1176))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(1079)
-					.addComponent(btnQuit)
-					.addContainerGap(1332, Short.MAX_VALUE))
+							.addGap(1079)
+							.addComponent(btnQuit)))
+					.addGap(46))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -250,56 +294,68 @@ public class Statistics extends JFrame {
 					.addContainerGap()
 					.addComponent(lblHeader)
 					.addGap(27)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblBattles, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblWins, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblLoses, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblDraws, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSurvived, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(lblBattlesIcon)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(lblMaxFrags, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblMaxXp, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblMaxDamage, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblBestIcon)))))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblMaxFrags, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblMaxXp, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblMaxDamage, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblBattles, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblNewLabel)
+									.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblSpotted, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblWins, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblDamageDealt, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addGap(4)
+									.addComponent(lblDamageReceived, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblLoses, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblHits, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblDraws, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblShots, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblSurvived, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(lblBestIcon))
-									.addComponent(lblBattlesIcon)))
+									.addComponent(lblPiercings, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblAverageAssist, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblAverageXp, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblAllXp, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblFrags, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblCapturePoints, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSpotted, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblArtilleryBattles, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+							.addGap(129)
+							.addComponent(btnQuit))
+						.addComponent(lblWn8Icon, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblEstimatedWn8, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblDamageDealt, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addGap(4)
-							.addComponent(lblDamageReceived, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblHits, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblShots, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblPiercings, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblAverageAssist, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblAverageXp, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblAllXp, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblFrags, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(lblCapturePoints, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblArtilleryBattles, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-					.addGap(129)
-					.addComponent(btnQuit)
+							.addComponent(lblWn8, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
