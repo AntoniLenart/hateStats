@@ -2,17 +2,24 @@ package wargaming_api;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.Core;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
+import javax.swing.JOptionPane;
+
 public class WargamingAPI {
 	
     private final static Logger logger = LogManager.getLogger(WargamingAPI.class);
+    
+    private static boolean correctUsername;
     
     private static final String [] RESPONSE_FIELDS = {
             "statistics.all.battles",
@@ -41,10 +48,12 @@ public class WargamingAPI {
     private static final String API_URL_STATISTICS = "https://api.worldoftanks.eu/wot/account/info/?application_id=636b76a3b5bd1b0812f0f34df886fe67";
     
     public static int getUserId(String username) {
+    	
         try {
             URL url = null;
             try {
                 url = new URI(API_URL_USER_ID + "&search=" + username).toURL();
+                logger.info("Success URL");
             } catch (URISyntaxException e) {
                 logger.error("URI error");
                 logger.error(e);
@@ -53,45 +62,61 @@ public class WargamingAPI {
                 logger.error(e);
             }
 
-            if (url != null) {
-                logger.info("Success URL");
-
-                //Answer
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-
-                reader.close();
-                connection.disconnect();
-
-                //Extract account ID
-                JSONObject jsonResponse = new JSONObject(response.toString());
-                JSONArray data = jsonResponse.getJSONArray("data");
-                JSONObject userData = data.getJSONObject(0);
-                int accountId = userData.getInt("account_id");
-
-                logger.info("Success retrieving accountID");
-                return accountId;
-
-            } else {
-                logger.error("URL is null, connection not established");
-                return 1;
+            // Answer from API.
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
             }
+
+            reader.close();
+            connection.disconnect();
+            
+            String responseString = response.toString();
+            
+            if (responseString.contains("error")) {
+            	logger.error("Error retrieving data");
+            	JOptionPane.showMessageDialog(null, "Data not found.");
+            	correctUsername = false;
+            	return 1;
+            }
+            
+            logger.info("Response: " + response);
+            
+            //Extract account ID
+            try {
+		        JSONObject jsonResponse = new JSONObject(responseString);
+		        JSONArray data = jsonResponse.getJSONArray("data");
+		        JSONObject userData = data.getJSONObject(0);
+		        int accountId = userData.getInt("account_id");
+		        	
+		        logger.info("Success retrieving accountID");
+				correctUsername = true;
+		        return accountId;
+		        
+            } catch (JSONException e) {
+            	correctUsername = false;
+            	logger.error("Data not found");
+            	logger.error(e);
+            	JOptionPane.showMessageDialog(null, "Data not found.");
+            }
+            
         } catch (IOException e){
             logger.error("URL incorrect");
             logger.error(e);
         }
+        correctUsername = false;
         return 1;
     }
 
     public static String [] getStats(int user_id) {
+    	
         String [] stats = new String[RESPONSE_FIELDS.length];
+        
         try {
             URL url = null;
             try {
@@ -110,17 +135,9 @@ public class WargamingAPI {
                 logger.info("Connected to " + url);
                 
             } catch (URISyntaxException e) {
-                logger.error("URI error");
                 logger.error(e);
-                
             } catch (MalformedURLException e) {
-                logger.error("URI to URL error");
                 logger.error(e);
-            }
-            
-            if (url == null) {
-                logger.error("URL = null");
-                return null;
             }
             
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -132,33 +149,44 @@ public class WargamingAPI {
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
+            
             reader.close();
             connection.disconnect();
-            logger.info("Success response");
-
-            //Extract stats
-            JSONObject jsonResponse = new JSONObject(response.toString());
-            JSONObject data = jsonResponse.getJSONObject("data");
-            JSONObject userData = data.getJSONObject(String.valueOf(user_id));
-            JSONObject statistics = userData.getJSONObject("statistics");
-            JSONObject allStats = statistics.getJSONObject("all");
-
-            int index = 0;
-            for (String parameter:RESPONSE_FIELDS) {
-                stats[index] = String.valueOf(allStats.getInt(parameter.replace("statistics.all.", "")));
-                index++;
+            
+            String responseString = response.toString();
+            if (responseString.contains("error")) {
+            	logger.error("Error retrieving user ID");
+            	JOptionPane.showMessageDialog(null, "Error retrieving user ID");
+            	return null;
             }
-            
-//            for (int i = 0; i < stats.length; i++) {
-//                System.out.println(RESPONSE_FIELDS[i].replace("statistics.all.", "") + " " + stats[i]);
-//            }
-            
-            logger.info("Succesfull stats retrieve");
-            return stats;
 
+            // Extract stats.
+            try {
+                JSONObject jsonResponse = new JSONObject(responseString);
+                JSONObject data = jsonResponse.getJSONObject("data");
+                JSONObject userData = data.getJSONObject(String.valueOf(user_id));
+                JSONObject statistics = userData.getJSONObject("statistics");
+                JSONObject allStats = statistics.getJSONObject("all");
+
+                int index = 0;
+                for (String parameter:RESPONSE_FIELDS) {
+                    stats[index] = String.valueOf(allStats.getInt(parameter.replace("statistics.all.", "")));
+                    index++;
+                }
+
+                logger.info("Success retrieving stats");
+                return stats;
+                
+            } catch (JSONException e) {
+            	logger.error(e);
+            }
         } catch (IOException e) {
             logger.error(e);
         }
         return stats;
+    }
+    
+    public static boolean isCorrect() {
+    	return correctUsername;
     }
 }

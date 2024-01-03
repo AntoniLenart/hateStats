@@ -3,6 +3,7 @@ package wargaming_api;
 import java.io.IOException;
 
 import javax.management.loading.ClassLoaderRepository;
+import javax.swing.JOptionPane;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,13 +19,11 @@ public class Wn8Scrapper {
 	private final static String path = "#tab1 > table:nth-child(3) > tbody > tr:nth-child(15) > td";
 	
 	public static double getWN8 (String username) {
-		double wn8 = 69;
+		double wn8 = 0;
 		
 		try {
 			Document document = Jsoup.connect(url + username).get();
 			Element element = document.select(path).first();
-			
-
 			
 			if (element == null) {
 				logger.error("Element not found");
@@ -40,7 +39,6 @@ public class Wn8Scrapper {
 			
 			response = response.replace("</td>", "");
 			response = response.replace(",", ".");
-			
 			
 			logger.info("Success scraping wn8: " + response);
 			
