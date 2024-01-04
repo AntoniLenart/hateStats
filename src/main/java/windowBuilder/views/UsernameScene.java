@@ -16,9 +16,6 @@ import javax.swing.WindowConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import wargaming_api.WargamingAPI;
-
-
 public class UsernameScene {
 	
 	private final static Logger logger = LogManager.getLogger(UsernameScene.class);
@@ -95,15 +92,7 @@ public class UsernameScene {
 				String username = txtField.getText();
 				txtField.setText("");
 				
-				Statistics stats = new Statistics(username);
-				
-				if (WargamingAPI.isCorrect()) {
-					stats.setVisible(true);
-				} else {
-					new UsernameScene();
-				}
-			
-				frame.dispose();
+				new StatsScene(username);
 			}
 		});
 		

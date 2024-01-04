@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import windowBuilder.views.Statistics;
+import windowBuilder.views.StatsScene;
 
 public class mainscene {
 	
@@ -74,8 +74,7 @@ public class mainscene {
 				String username = txtField.getText();
 				txtField.setText("");
 				
-				Statistics stats = new Statistics(username);
-				stats.setVisible(true);
+				new StatsScene(username);
 				frame.dispose();
 			}
 		});

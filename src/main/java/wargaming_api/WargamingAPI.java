@@ -17,7 +17,6 @@ public class WargamingAPI {
 	
     private final static Logger logger = LogManager.getLogger(WargamingAPI.class);
     
-    private static boolean correctUsername;
     
     private static final String [] RESPONSE_FIELDS = {
             "statistics.all.battles",
@@ -80,7 +79,6 @@ public class WargamingAPI {
                 if (responseString.contains("error")) {
                 	logger.error("Error retrieving data");
                 	JOptionPane.showMessageDialog(null, "Data not found.");
-                	correctUsername = false;
                 	return 1;
                 }
                 
@@ -94,10 +92,8 @@ public class WargamingAPI {
     		        int accountId = userData.getInt("account_id");
     		        	
     		        logger.info("Success retrieving accountID");
-    				correctUsername = true;
     		        return accountId;   
                 } catch (JSONException e) {
-                	correctUsername = false;
                 	logger.error("Data not found");
                 	logger.error(e);
                 	JOptionPane.showMessageDialog(null, "Data not found.");
@@ -111,7 +107,6 @@ public class WargamingAPI {
             logger.error("URL incorrect");
             logger.error(e);
         }
-        correctUsername = false;
         return 1;
     }
 
@@ -186,9 +181,5 @@ public class WargamingAPI {
             logger.error(e);
         }
         return stats;
-    }
-    
-    public static boolean isCorrect() {
-    	return correctUsername;
     }
 }
