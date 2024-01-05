@@ -284,6 +284,7 @@ public class StatsScene {
 	private void createEvents() {
 		
 		if (btnNewPlayer == null || btnNewPlayer == null) {
+			new UsernameScene();
 			return;
 		}
 		

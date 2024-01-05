@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 public class WargamingAPI {
 	
     private final static Logger logger = LogManager.getLogger(WargamingAPI.class);
-    
+    private final static String statisticsPath = "./src/main/resources/statistics.json";
     
     private static final String [] RESPONSE_FIELDS = {
             "statistics.all.battles",
@@ -146,6 +147,7 @@ public class WargamingAPI {
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
+            logger.info("Response:" + response.toString());
             
             reader.close();
             connection.disconnect();
@@ -165,6 +167,15 @@ public class WargamingAPI {
                 JSONObject statistics = userData.getJSONObject("statistics");
                 JSONObject allStats = statistics.getJSONObject("all");
 
+                // Wriiting statistics to file.
+                try (FileWriter file = new FileWriter(statisticsPath)){
+                	file.write(allStats.toString());
+                	logger.info("Success writing statistics to file");
+                } catch (IOException e) {
+                	logger.error("Error writing statistics to file");
+                	logger.error(e);
+                }
+                
                 int index = 0;
                 for (String parameter:RESPONSE_FIELDS) {
                     stats[index] = String.valueOf(allStats.getInt(parameter.replace("statistics.all.", "")));

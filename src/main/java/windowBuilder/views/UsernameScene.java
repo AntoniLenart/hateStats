@@ -93,6 +93,7 @@ public class UsernameScene {
 				txtField.setText("");
 				
 				new StatsScene(username);
+				frame.dispose();
 			}
 		});
 		
