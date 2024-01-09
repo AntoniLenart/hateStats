@@ -29,8 +29,9 @@ public class UsernameScene {
 	private JTextField txtField;
 	
 	private JLabel background;
-	private JLabel lblUsername;
 	private JLabel lblHeader;
+	
+	private BorderedLabel lblUsername;
 	
 	
 	public UsernameScene() {
@@ -62,7 +63,7 @@ public class UsernameScene {
 		frame.add(txtField);
 		
 		// Label username.
-		lblUsername = new JLabel("Username:");
+		lblUsername = new BorderedLabel("Username:");
 		lblUsername.setBounds(548, 270, 150, 25);
 		lblUsername.setFont(new Font ("Tahoma", Font.BOLD, 20));
 		frame.add(lblUsername);

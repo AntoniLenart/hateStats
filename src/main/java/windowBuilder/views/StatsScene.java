@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import wargaming_api.WargamingAPI;
@@ -26,31 +25,32 @@ public class StatsScene {
 	
 	private ImageIcon backgroundIcon;
 	private JLabel background;
-	private JLabel lblHeader;
 	
-	private JLabel lblBattles;
-	private JLabel lblWins;
-	private JLabel lblDraws;
-	private JLabel lblLoses;
-	private JLabel lblSurvived;
-	private JLabel lblSpotted;
-	private JLabel lblDamageDealt;
-	private JLabel lblMaxFrags;
-	private JLabel lblMaxXp;
-	private JLabel lblMaxDamage;
-	private JLabel lblDamageReceived;
-	private JLabel lblHits;
-	private JLabel lblAverageAssist;
-	private JLabel lblArtilleryBattles;
-	private JLabel lblAverageXp;
-	private JLabel lblShots;
-	private JLabel lblPiercings;
-	private JLabel lblCapturePoints;
-	private JLabel lblAllXp;
-	private JLabel lblFrags;
+	private BorderedLabel lblHeader;
 	
-	private JLabel lblEstimatedWn8;
-	private JLabel lblWn8;
+	private BorderedLabel lblBattles;
+	private BorderedLabel lblWins;
+	private BorderedLabel lblDraws;
+	private BorderedLabel lblLoses;
+	private BorderedLabel lblSurvived;
+	private BorderedLabel lblSpotted;
+	private BorderedLabel lblDamageDealt;
+	private BorderedLabel lblMaxFrags;
+	private BorderedLabel lblMaxXp;
+	private BorderedLabel lblMaxDamage;
+	private BorderedLabel lblDamageReceived;
+	private BorderedLabel lblHits;
+	private BorderedLabel lblAverageAssist;
+	private BorderedLabel lblArtilleryBattles;
+	private BorderedLabel lblAverageXp;
+	private BorderedLabel lblShots;
+	private BorderedLabel lblPiercings;
+	private BorderedLabel lblCapturePoints;
+	private BorderedLabel lblAllXp;
+	private BorderedLabel lblFrags;
+	
+	private BorderedLabel lblEstimatedWn8;
+	private BorderedLabel lblWn8;
 	
 	private JLabel lblBattlesIcon;
 	private JLabel lblBestIcon;
@@ -109,111 +109,110 @@ public class StatsScene {
 		if (ID == 1) {
 			return;
 		}
-		lblHeader = new JLabel("hateStats for " + username + " (ID: " + ID + ")");
-		lblHeader.setFont(new Font("Stencil", Font.BOLD, 40));
+		lblHeader = new BorderedLabel("hateStats for " + username + " (ID: " + ID + ")");
+		lblHeader.setFont(new Font("Cambria", Font.BOLD, 40));
 		lblHeader.setBounds(100, 40, 1200, 40);
 		lblHeader.setForeground(Color.BLACK);
 		frame.add(lblHeader);
 		
 		//======================LABELS=======================
 		
-		lblBattles = new JLabel("Battles:");
+		lblBattles = new BorderedLabel("Battles:");
 		lblBattles.setBounds(220, 120, 200, 25);
 		frame.add(lblBattles);
 		
-		lblWins = new JLabel("Wins:");
+		lblWins = new BorderedLabel("Wins:");
 		lblWins.setBounds(220, 150, 300, 25);
 		frame.add(lblWins);
 		
-		lblDraws = new JLabel("Draws:");
+		lblDraws = new BorderedLabel("Draws:");
 		lblDraws.setBounds(220, 180, 300, 25);
 		frame.add(lblDraws);
 		
-		lblLoses = new JLabel("Loses:");
+		lblLoses = new BorderedLabel("Loses:");
 		lblLoses.setBounds(220, 210, 300, 25);
 		frame.add(lblLoses);
 		
-		lblSurvived = new JLabel("Survived:");
+		lblSurvived = new BorderedLabel("Survived:");
 		lblSurvived.setBounds(220, 240, 300, 25);
 		frame.add(lblSurvived);
 		
-		lblFrags = new JLabel("Frags:");
+		lblFrags = new BorderedLabel("Frags:");
 		lblFrags.setBounds(220, 270, 300, 25);
 		frame.add(lblFrags);
 		
-		lblSpotted = new JLabel("Spotted:");
+		lblSpotted = new BorderedLabel("Spotted:");
 		lblSpotted.setBounds(220, 300, 300, 25);
 		frame.add(lblSpotted);
 		
-		lblDamageDealt = new JLabel("Damage dealt:");
+		lblDamageDealt = new BorderedLabel("Damage dealt:");
 		lblDamageDealt.setBounds(220, 330, 300, 25);
 		frame.add(lblDamageDealt);
 
-		lblDamageReceived = new JLabel("Damage received:");
+		lblDamageReceived = new BorderedLabel("Damage received:");
 		lblDamageReceived.setBounds(220, 360, 300, 25);
 		frame.add(lblDamageReceived);
 
-		lblHits = new JLabel("Hits:");
+		lblHits = new BorderedLabel("Hits:");
 		lblHits.setBounds(220, 390, 300, 25);
 		frame.add(lblHits);
 		
-		lblAverageAssist = new JLabel("Average assist:");
+		lblAverageAssist = new BorderedLabel("Average assist:");
 		lblAverageAssist.setBounds(220, 420, 300, 25);
 		frame.add(lblAverageAssist);
 		
-		lblArtilleryBattles = new JLabel("Artillery battles:");
+		lblArtilleryBattles = new BorderedLabel("Artillery battles:");
 		lblArtilleryBattles.setBounds(220, 450, 300, 25);
 		frame.add(lblArtilleryBattles);
 		
-		lblAverageXp = new JLabel("Average xp:");
+		lblAverageXp = new BorderedLabel("Average xp:");
 		lblAverageXp.setBounds(220, 480, 300, 25);
 		frame.add(lblAverageXp);
 		
-		lblAllXp = new JLabel("All XP:");
+		lblAllXp = new BorderedLabel("All XP:");
 		lblAllXp.setBounds(220, 510, 300, 25);
 		frame.add(lblAllXp);
 		
-		lblCapturePoints = new JLabel("Capture points:");
+		lblCapturePoints = new BorderedLabel("Capture points:");
 		lblCapturePoints.setBounds(220, 540, 300, 25);
 		frame.add(lblCapturePoints);
 		
-		lblShots = new JLabel("Shots:");
+		lblShots = new BorderedLabel("Shots:");
 		lblShots.setBounds(220, 570, 300, 25);
 		frame.add(lblShots);
 		
-		lblPiercings = new JLabel("Piercings:");
+		lblPiercings = new BorderedLabel("Piercings:");
 		lblPiercings.setBounds(220, 600, 300, 25);
 		frame.add(lblPiercings);
 		
 		// MAX LABELS (RIGHT SIDE OF THE WINDOW).
-		lblMaxFrags = new JLabel("Max frags:");
+		lblMaxFrags = new BorderedLabel("Max frags:");
 		lblMaxFrags.setBounds(850, 150, 200, 25);
 		frame.add(lblMaxFrags);
 		
-		lblMaxXp = new JLabel("Max XP:");
+		lblMaxXp = new BorderedLabel("Max XP:");
 		lblMaxXp.setBounds(850, 180, 200, 25);
 		frame.add(lblMaxXp);
 		
-		lblMaxDamage = new JLabel("Max damage:");
+		lblMaxDamage = new BorderedLabel("Max damage:");
 		lblMaxDamage.setBounds(850, 210, 200, 25);
 		frame.add(lblMaxDamage);
 		
 		// WN8 LABELS
-		lblWn8 = new JLabel("WN8:");
-		lblEstimatedWn8 = new JLabel("Estimated WN8:");
 		double wn8_raw = Wn8Scrapper.getWN8(username);
 		String wn8 = Double.toString(wn8_raw);
 		Color color = Wn8Color.getColor(wn8_raw);
 		
+		lblWn8 = new BorderedLabel("WN8:", color);
+		lblEstimatedWn8 = new BorderedLabel("Estimated WN8:");
 		lblWn8.setText(lblWn8.getText() + " " + wn8);
-		lblWn8.setFont(new Font("Stencil", Font.BOLD, 25));
-		lblWn8.setForeground(color);
+		lblWn8.setFont(new Font("Cambria", Font.BOLD, 25));
 		lblWn8.setBounds(830, 300, 200, 25);
 		frame.add(lblWn8);
 		
 		// ============================TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 		lblEstimatedWn8.setBounds(830, 330, 300, 25);
-		lblEstimatedWn8.setFont(new Font("Stencil", Font.BOLD, 25));
+		lblEstimatedWn8.setFont(new Font("Cambria", Font.BOLD, 25));
 		lblEstimatedWn8.setForeground(Color.BLACK);
 		frame.add(lblEstimatedWn8);
 		
@@ -243,8 +242,8 @@ public class StatsScene {
 		
 		// Setting font for all statistic labels.
 		for (int i = 0; i < labels.length; i++) {
-			labels[i].setFont(new Font("Stencil", Font.PLAIN, 20));
-			labels[i].setForeground(Color.BLACK);
+			labels[i].setFont(new Font("Cambria", Font.PLAIN, 20));
+			//labels[i].setForeground(Color.BLACK);
 		}
 		
 		// Retrieve stats.
