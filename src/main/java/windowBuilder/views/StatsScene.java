@@ -219,7 +219,6 @@ public class StatsScene {
 		lblEstimatedWn8.setBounds(830, 330, 300, 25);
 		
 		try {
-			logger.info("Trying to read estimated wn8.");
 			BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/estimatedWN8.txt"));
 			String estimatedWn8 = reader.readLine();
 			String tmp = lblEstimatedWn8.getText();
@@ -316,6 +315,12 @@ public class StatsScene {
 				new UsernameScene();
 			}
 		});	
+		
+		btnShowDiagrams.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new DiagramsScene();
+			}
+		});
 	}
 	
 //	public static void setVisible() {
