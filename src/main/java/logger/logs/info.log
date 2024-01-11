@@ -1651,3 +1651,11 @@
 2024-01-09 18:13:38,902 INFO  wargaming_api.WargamingAPI.getStats | Success writing statistics to file
 2024-01-09 18:13:38,903 INFO  wargaming_api.WargamingAPI.getStats | Success retrieving stats
 2024-01-09 18:13:40,309 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:27:08,768 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:28:15,836 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:31:56,213 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:32:13,042 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:32:20,999 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:32:29,672 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:32:38,026 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.
+2024-01-11 13:34:54,923 INFO  windowBuilder.views.UsernameScene.<init> | Opening username scene.

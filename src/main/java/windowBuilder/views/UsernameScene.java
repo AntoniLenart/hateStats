@@ -31,6 +31,9 @@ public class UsernameScene {
 	private JLabel background;
 	private JLabel lblHeader;
 	
+	private JLabel lblLogo;
+	private ImageIcon logo;
+	
 	private BorderedLabel lblUsername;
 	
 	
@@ -46,6 +49,12 @@ public class UsernameScene {
 		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/background.png"));
 		background = new JLabel(backgroundIcon);
 		background.setSize(1200, 700);
+		
+		// Logo.
+		logo = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/logo.png"));
+		lblLogo = new JLabel(logo);
+		lblLogo.setBounds(540, 50, 128, 128);
+		frame.add(lblLogo);
 		
 		// Submit button.
 		btnSubmit = new JButton("Submit");

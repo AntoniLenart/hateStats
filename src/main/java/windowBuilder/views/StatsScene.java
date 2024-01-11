@@ -70,6 +70,13 @@ public class StatsScene {
 	}
 
 	private void initComponents(String username) {
+		
+		// Check if id is ok.
+		int ID = WargamingAPI.getUserId(username);
+		if (ID == 1) {
+			return;
+		}
+		
 		frame = new JFrame();
 		
 		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/background.png"));
@@ -105,10 +112,6 @@ public class StatsScene {
 		frame.add(lblWn8Icon);
 		
 		// HEADER LABEL.
-		int ID = WargamingAPI.getUserId(username);
-		if (ID == 1) {
-			return;
-		}
 		lblHeader = new BorderedLabel("hateStats for " + username + " (ID: " + ID + ")");
 		lblHeader.setFont(new Font("Cambria", Font.BOLD, 40));
 		lblHeader.setBounds(100, 40, 1200, 40);
@@ -301,10 +304,10 @@ public class StatsScene {
 		});	
 	}
 	
-	public static void setVisible() {
-		
-	}
-	public static void main(String[] args) {
-		new StatsScene("szachit");
-	}
+//	public static void setVisible() {
+//		
+//	}
+//	public static void main(String[] args) {
+//		new StatsScene("szachit");
+//	}
 }
