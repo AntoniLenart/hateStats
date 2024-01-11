@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,7 +67,7 @@ public class StatsScene {
 	
 	
 	public StatsScene(String username) {
-		logger.info("Opening statistics window for player" + username);
+		logger.info("Opening statistics window for player: " + username);
 		initComponents(username);
 		createEvents();
 	}
@@ -79,35 +82,35 @@ public class StatsScene {
 		
 		frame = new JFrame();
 		
-		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/background.png"));
+		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/icons/background.png"));
 		background = new JLabel(backgroundIcon);
 		background.setSize(1200, 700);
 		
 		//======================ICONS=======================
 		// Left side icons.
 		lblBattlesIcon = new JLabel();
-		lblBattlesIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/resources/battles_128.png")));
+		lblBattlesIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/icons/battles_128.png")));
 		lblBattlesIcon.setBounds(60, 120, 128, 128);
 		frame.add(lblBattlesIcon);
 
 		lblShotsIcon = new JLabel();
-		lblShotsIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/resources/shots_128.png")));
+		lblShotsIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/icons/shots_128.png")));
 		lblShotsIcon.setBounds(60, 300, 128, 128);
 		frame.add(lblShotsIcon);
 		
 		lblAverageIcon = new JLabel();
-		lblAverageIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/resources/average_128.png")));
+		lblAverageIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/icons/average_128.png")));
 		lblAverageIcon.setBounds(60, 480, 128, 128);
 		frame.add(lblAverageIcon);
 		
 		// Right side icons.
 		lblBestIcon = new JLabel();
-		lblBestIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/resources/best_128.png")));
+		lblBestIcon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/icons/best_128.png")));
 		lblBestIcon.setBounds(690, 120, 128, 128);
 		frame.add(lblBestIcon);
 		
 		lblWn8Icon = new JLabel();
-		lblWn8Icon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/resources/wins_128.png")));
+		lblWn8Icon.setIcon(new ImageIcon(StatsScene.class.getResource("/windowBuilder/icons/wins_128.png")));
 		lblWn8Icon.setBounds(690, 300, 128, 128);
 		frame.add(lblWn8Icon);
 		
@@ -207,14 +210,25 @@ public class StatsScene {
 		Color color = Wn8Color.getColor(wn8_raw);
 		
 		lblWn8 = new BorderedLabel("WN8:", color);
-		lblEstimatedWn8 = new BorderedLabel("Estimated WN8:");
 		lblWn8.setText(lblWn8.getText() + " " + wn8);
 		lblWn8.setFont(new Font("Cambria", Font.BOLD, 25));
 		lblWn8.setBounds(830, 300, 200, 25);
 		frame.add(lblWn8);
 		
-		// ============================TO DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+		lblEstimatedWn8 = new BorderedLabel("Estimated WN8:");
 		lblEstimatedWn8.setBounds(830, 330, 300, 25);
+		
+		try {
+			logger.info("Trying to read estimated wn8.");
+			BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/estimatedWN8.txt"));
+			String estimatedWn8 = reader.readLine();
+			String tmp = lblEstimatedWn8.getText();
+			lblEstimatedWn8.setText(tmp + " " + estimatedWn8);
+			reader.close();
+		} catch (IOException e) {
+			logger.error(e);
+		}
+
 		lblEstimatedWn8.setFont(new Font("Cambria", Font.BOLD, 25));
 		lblEstimatedWn8.setForeground(Color.BLACK);
 		frame.add(lblEstimatedWn8);
@@ -272,7 +286,7 @@ public class StatsScene {
 		frame.add(btnQuit);
 		
 		// Frame settings.
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/windowBuilder/resources/stats_128.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/windowBuilder/icons/stats_128.png")));
 		frame.setTitle("hateStats");
 		frame.add(background);
 		frame.setResizable(false);

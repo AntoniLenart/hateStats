@@ -46,12 +46,12 @@ public class UsernameScene {
 	private void initComponents() {
 		frame = new JFrame();
 		
-		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/background.png"));
+		backgroundIcon = new ImageIcon(this.getClass().getResource("/windowBuilder/icons/background.png"));
 		background = new JLabel(backgroundIcon);
 		background.setSize(1200, 700);
 		
 		// Logo.
-		logo = new ImageIcon(this.getClass().getResource("/windowBuilder/resources/logo.png"));
+		logo = new ImageIcon(this.getClass().getResource("/windowBuilder/icons/logo.png"));
 		lblLogo = new JLabel(logo);
 		lblLogo.setBounds(540, 50, 128, 128);
 		frame.add(lblLogo);
@@ -83,7 +83,7 @@ public class UsernameScene {
 		lblHeader.setFont(new Font("Tahoma", Font.BOLD, 40));
 		frame.add(lblHeader);
 
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/windowBuilder/resources/stats_128.png")));
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/windowBuilder/icons/stats_128.png")));
 		frame.setTitle("hateStats");
 		frame.add(background);
 		frame.setResizable(false);

@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 
@@ -167,7 +168,7 @@ public class WargamingAPI {
                 JSONObject statistics = userData.getJSONObject("statistics");
                 JSONObject allStats = statistics.getJSONObject("all");
 
-                // Wriiting statistics to file.
+                // Writing statistics to file.
                 try (FileWriter file = new FileWriter(statisticsPath)){
                 	file.write(allStats.toString());
                 	logger.info("Success writing statistics to file");
@@ -176,6 +177,47 @@ public class WargamingAPI {
                 	logger.error(e);
                 }
                 
+                // Running python script.
+                try {
+	                String pyScriptPath = "/src/main/python/wn8_prediction.py";
+	                String command = "python " + pyScriptPath;
+	                Process process = Runtime.getRuntime().exec(command);
+
+	                int exitCode = process.waitFor();
+	                
+	                if (exitCode == 0) {
+	                	logger.info("Success running python script.");
+	                } else {
+		                logger.error("Error running python script. Exit code: " + exitCode);
+	                }
+
+                } catch (IOException | InterruptedException e) {
+                	logger.error("Error running python script.");
+                	logger.error(e);
+                }
+                
+//                try {
+//                	String pyScriptPath = "./src/main/resources/wn8_prediction.py";
+//                	String command = "python " + pyScriptPath;
+//
+//                	ProcessBuilder processBuilder = new ProcessBuilder(command);
+//                	processBuilder.redirectErrorStream(true);
+//
+//                	Process process = processBuilder.start();
+//
+//                	BufferedReader pyReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//                	String pyLine;
+//                	while ((pyLine = pyReader.readLine()) != null) {
+//                	    logger.info(pyLine);
+//                	}
+//
+//                	int exitCode = process.waitFor();
+//                	System.out.println("Exit code: " + exitCode);
+//                } catch (IOException | InterruptedException e) {
+//                	logger.error(e);
+//                }
+                
+// =========================================================================================================================          
                 int index = 0;
                 for (String parameter:RESPONSE_FIELDS) {
                     stats[index] = String.valueOf(allStats.getInt(parameter.replace("statistics.all.", "")));
