@@ -44,32 +44,29 @@ public class DiagramsScene {
 		
 		diagram1 = new JLabel();
 		diagram1.setIcon(new ImageIcon(DiagramsScene.class.getResource("/plots/fig_1.png")));
-		//diagram1.setSize(600, 600);
+		diagram1.setSize(1000, 600);
 		diagram1.setBounds(0, 0, 1000, 600);
 		frame.add(diagram1);
 		
 		diagram2 = new JLabel();
 		diagram2.setIcon(new ImageIcon(DiagramsScene.class.getResource("/plots/fig_2.png")));
-		//diagram2.setSize(600, 600);
+		diagram2.setSize(1000, 600);
 		diagram2.setBounds(1000, 0, 1000, 600);
-		frame.add(diagram2);
 		
 		diagram3 = new JLabel();
 		diagram3.setIcon(new ImageIcon(DiagramsScene.class.getResource("/plots/fig_3.png")));
-		//diagram3.setSize(600,600);
+		diagram3.setSize(1000,600);
 		diagram3.setBounds(0, 0, 1000, 600);
-		frame.add(diagram3);
 		
 		diagram4 = new JLabel();
 		diagram4.setIcon(new ImageIcon(DiagramsScene.class.getResource("/plots/fig_4.png")));
-		//diagram4.setSize(600, 600);
+		diagram4.setSize(1000, 600);
 		diagram4.setBounds(1000, 0, 1000, 600);
-		frame.add(diagram4);
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/windowBuilder/icons/stats_128.png")));
 		frame.setTitle("hateStats");
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 1900, 700);
+		frame.setBounds(100, 100, 1100, 700);
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);

@@ -12,10 +12,10 @@ import pickle
 
 # In[65]:
 
-plotsPath = 'plots/'
-statsPath = 'statistics.json'
-modelPath = 'model.pkl'
-wn8FilePath = 'estimatedWN8.txt'
+plotsPath = './src/main/resources/plots/'
+statsPath = './src/main/resources/statistics.json'
+modelPath = './src/main/resources/model.pkl'
+wn8FilePath = './src/main/resources/estimatedWN8.txt'
 
 # In[66]:
 

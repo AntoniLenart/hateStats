@@ -79,6 +79,8 @@ public class StatsScene {
 		if (ID == 1) {
 			return;
 		}
+		// Retrieve stats.
+		String [] stats = WargamingAPI.getStats(ID);
 		
 		frame = new JFrame();
 		
@@ -262,9 +264,6 @@ public class StatsScene {
 			//labels[i].setForeground(Color.BLACK);
 		}
 		
-		// Retrieve stats.
-		String [] stats = WargamingAPI.getStats(ID);
-		
 		// Adding stats to labels.
 		for (int i = 0; i < stats.length; i++) {
 			String tmp = labels[i].getText();
@@ -322,11 +321,4 @@ public class StatsScene {
 			}
 		});
 	}
-	
-//	public static void setVisible() {
-//		
-//	}
-//	public static void main(String[] args) {
-//		new StatsScene("szachit");
-//	}
 }
